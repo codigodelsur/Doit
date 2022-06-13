@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Doit</string>
+    <string name="app_name" translatable="false">Doit</string>
+
+    <string name="task_status_pending">Pending</string>
+    <string name="task_status_in_progress">In progress</string>
+    <string name="task_status_completed">Completed</string>
 </resources>

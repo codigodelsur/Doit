@@ -3,13 +3,9 @@ package com.codigodelsur.doit.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
+import com.codigodelsur.doit.presentation.screen.home.HomeScreen
 import com.codigodelsur.doit.presentation.theme.DoitTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,29 +13,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            DoitTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            DoitApp()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
+fun DoitApp() {
     DoitTheme {
-        Greeting("Android")
+        HomeScreen()
     }
 }

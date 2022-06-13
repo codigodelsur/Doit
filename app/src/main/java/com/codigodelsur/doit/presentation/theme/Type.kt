@@ -8,21 +8,27 @@ import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+    h6 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+    ),
+    subtitle1 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Normal,
+    ),
     body1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    )
-    /* Other default text styles to override
-    button = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
         fontSize = 14.sp
     ),
     caption = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
+    ),
+    overline = TextStyle(
+        fontFamily = FontFamily.Default,
         fontSize = 12.sp
-    )
-    */
+    ),
 )
