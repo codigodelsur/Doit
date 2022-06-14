@@ -35,3 +35,12 @@ fun TaskStatus.toPresentation(): PTaskStatus {
         TaskStatus.COMPLETED -> PTaskStatus.COMPLETED
     }
 }
+
+@StringRes
+fun PTaskStatus.toHeaderLabelRes(): Int {
+    return when (this) {
+        PTaskStatus.PENDING -> R.string.tasks_header_pending
+        PTaskStatus.IN_PROGRESS -> R.string.tasks_header_in_progress
+        PTaskStatus.COMPLETED -> R.string.tasks_header_completed
+    }
+}
