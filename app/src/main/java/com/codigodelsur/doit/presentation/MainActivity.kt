@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.core.view.WindowCompat
-import com.codigodelsur.doit.presentation.screen.home.HomeScreen
+import com.codigodelsur.doit.presentation.screen.create.CreateTaskScreen
 import com.codigodelsur.doit.presentation.theme.DoitTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +25,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DoitApp() {
     DoitTheme {
-        HomeScreen()
+        CreateTaskScreen()
     }
 }

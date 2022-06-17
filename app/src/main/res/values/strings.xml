@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Doit</string>
 
+    <string name="action_navigate_back">Navigate back</string>
+    <string name="action_remove_goal">Remove goal</string>
+
     <string name="task_status_pending">Pending</string>
     <string name="task_status_in_progress">In progress</string>
     <string name="task_status_completed">Completed</string>
@@ -8,4 +11,18 @@
     <string name="tasks_header_pending">Pending tasks</string>
     <string name="tasks_header_in_progress">In progress tasks</string>
     <string name="tasks_header_completed">Completed tasks</string>
+
+    <string name="create_task_top_bar_title">Create new task</string>
+
+    <string name="create_task_title_label">Title</string>
+    <string name="create_task_description_label">Description</string>
+    <string name="create_task_date_label">Date</string>
+    <string name="create_task_goals_label">Add goals</string>
+
+    <string name="create_task_title_hint">Enter title here</string>
+    <string name="create_task_description_hint">Enter description here</string>
+    <string name="create_task_date_hint">DD/MM/YYYY</string>
+    <string name="create_task_goals_hint">Enter a goal here</string>
+
+    <string name="create_task_button">Create task</string>
 </resources>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="action_navigate_back">Navegar hacia atrás</string>
+    <string name="action_remove_goal">Eliminar objetivo</string>
+
     <string name="task_status_pending">Pendiente</string>
     <string name="task_status_in_progress">En progreso</string>
     <string name="task_status_completed">Completada</string>
@@ -7,4 +10,18 @@
     <string name="tasks_header_pending">Tareas pendientes</string>
     <string name="tasks_header_in_progress">Tareas en progreso</string>
     <string name="tasks_header_completed">Tareas completadas</string>
+
+    <string name="create_task_top_bar_title">Crear nueva tarea</string>
+
+    <string name="create_task_title_label">Título</string>
+    <string name="create_task_description_label">Descripción</string>
+    <string name="create_task_date_label">Fecha</string>
+    <string name="create_task_goals_label">Agregar objetivos</string>
+
+    <string name="create_task_title_hint">Ingrese el título aquí</string>
+    <string name="create_task_description_hint">Ingrese la descripción aquí</string>
+    <string name="create_task_date_hint">DD/MM/YYYY</string>
+    <string name="create_task_goals_hint">Ingrese un objetivo aquí</string>
+
+    <string name="create_task_button">Crear tarea</string>
 </resources>
