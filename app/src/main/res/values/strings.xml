@@ -12,6 +12,9 @@
     <string name="tasks_header_in_progress">In progress tasks</string>
     <string name="tasks_header_completed">Completed tasks</string>
 
+    <string name="home_placeholder_title">Day off?</string>
+    <string name="home_placeholder_description">Add a new task</string>
+
     <string name="create_task_top_bar_title">Create new task</string>
 
     <string name="create_task_title_label">Title</string>

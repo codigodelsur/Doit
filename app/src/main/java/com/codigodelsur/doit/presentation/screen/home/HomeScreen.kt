@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
@@ -26,48 +27,66 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.codigodelsur.doit.R
+import com.codigodelsur.doit.presentation.component.DoitPlaceholder
 import com.codigodelsur.doit.presentation.model.PTask
 import com.codigodelsur.doit.presentation.model.PTaskStatus
 import com.codigodelsur.doit.presentation.theme.DoitTheme
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
+) {
     HomeScreenContent(
-        groupedTasks = PTask.samplesGroupedByStatus,
+        uiState = viewModel.uiState,
         modifier = modifier,
     )
 }
 
 @Composable
 fun HomeScreenContent(
-    groupedTasks: Map<PTaskStatus, List<PTask>>,
+    uiState: HomeUiState,
     modifier: Modifier = Modifier,
 ) {
+    val tasksGroupedByStatus = uiState.tasksGroupedByStatus
+
     Scaffold(
         modifier = modifier,
         topBar = {
             HomeToolbar()
         },
     ) { contentPadding ->
-        LazyColumn(
-            modifier = Modifier.padding(contentPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp),
-        ) {
-            groupedTasks.forEach { (status, tasks) ->
-                item(
-                    contentType = PTaskStatus::class.java.simpleName
-                ) {
-                    TaskStatusHeader(taskStatus = status)
-                }
+        if (tasksGroupedByStatus.isEmpty()) {
+            DoitPlaceholder(
+                painter = painterResource(id = R.drawable.ic_calendar),
+                title = stringResource(id = R.string.home_placeholder_title),
+                description = stringResource(id = R.string.home_placeholder_description),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(contentPadding),
+            )
+        } else {
+            LazyColumn(
+                modifier = Modifier.padding(contentPadding),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(16.dp),
+            ) {
+                tasksGroupedByStatus.forEach { (status, tasks) ->
+                    item(
+                        contentType = PTaskStatus::class.java.simpleName
+                    ) {
+                        TaskStatusHeader(taskStatus = status)
+                    }
 
-                items(
-                    items = tasks,
-                    key = { task -> task.id },
-                    contentType = { PTask::class.java.simpleName }
-                ) { task ->
-                    TaskItem(task = task)
+                    items(
+                        items = tasks,
+                        key = { task -> task.id },
+                        contentType = { PTask::class.java.simpleName }
+                    ) { task ->
+                        TaskItem(task = task)
+                    }
                 }
             }
         }
@@ -120,6 +139,10 @@ fun HomeToolbarPreview() {
 @Composable
 fun HomeScreenContentPreview() {
     DoitTheme {
-        HomeScreenContent(groupedTasks = PTask.samplesGroupedByStatus)
+        HomeScreenContent(
+            uiState = HomeUiState(
+                tasksGroupedByStatus = PTask.samplesGroupedByStatus,
+            ),
+        )
     }
 }
