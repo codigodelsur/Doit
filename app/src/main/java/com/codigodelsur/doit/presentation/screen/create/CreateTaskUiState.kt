@@ -6,4 +6,5 @@ data class CreateTaskUiState(
     val date: String = "",
     val goal: String = "",
     val goals: List<String> = emptyList(),
+    val taskCreated: Boolean = false,
 )

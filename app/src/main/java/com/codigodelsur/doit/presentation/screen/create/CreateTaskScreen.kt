@@ -17,6 +17,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,9 +34,17 @@ import com.codigodelsur.doit.presentation.util.DateVisualTransformation
 
 @Composable
 fun CreateTaskScreen(
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: CreateTaskViewModel = hiltViewModel(),
 ) {
+    val currentOnNavigateBack by rememberUpdatedState(onNavigateBack)
+    LaunchedEffect(viewModel.uiState) {
+        if (viewModel.uiState.taskCreated) {
+            currentOnNavigateBack()
+        }
+    }
+
     CreateTaskScreenContent(
         uiState = viewModel.uiState,
         onTitleChange = viewModel::onTitleChange,
@@ -42,7 +53,7 @@ fun CreateTaskScreen(
         onGoalChange = viewModel::onGoalChange,
         onSubmitGoal = viewModel::onSubmitGoal,
         onDeleteGoal = viewModel::onDeleteGoal,
-        onNavigateBack = { /*TODO*/ },
+        onNavigateBack = onNavigateBack,
         onCreateTask = viewModel::onCreateTask,
         modifier = modifier,
     )

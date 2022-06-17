@@ -60,6 +60,7 @@ class CreateTaskViewModel @Inject constructor(
                     date = date.toDateOrNull() ?: Date(),
                     goals = goals,
                 )
+                uiState = uiState.copy(taskCreated = true)
             }
         }
     }
