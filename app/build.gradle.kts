@@ -61,6 +61,7 @@ dependencies {
     implementation(Deps.composeMaterial)
     implementation(Deps.composeUiPreviewTools)
     implementation(Deps.composeActivity)
+    implementation(Deps.composeConstraintLayout)
 
     // Jetpack Navigation
     implementation(Deps.composeNavigation)

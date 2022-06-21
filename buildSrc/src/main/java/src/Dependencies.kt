@@ -19,6 +19,7 @@ object Versions {
     const val androidExt = "1.7.0"
     const val compose = "1.2.0-beta02"
     const val activity = "1.4.0"
+    const val constraintLayout = "1.1.0-alpha02"
 
     // Jetpack
     const val navigation = "2.4.2"
@@ -52,6 +53,7 @@ object Deps {
     const val composeUiPreviewTools = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
     const val composeUiTools = "androidx.compose.ui:ui-tooling:${Versions.compose}"
     const val composeActivity = "androidx.activity:activity-compose:${Versions.activity}"
+    const val composeConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayout}"
 
     // AndroidX Room
     const val room = "androidx.room:room-runtime:${Versions.room}"
