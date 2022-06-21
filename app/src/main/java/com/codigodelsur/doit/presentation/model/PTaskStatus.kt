@@ -36,6 +36,14 @@ fun TaskStatus.toPresentation(): PTaskStatus {
     }
 }
 
+fun PTaskStatus.toDomain(): TaskStatus {
+    return when(this) {
+        PTaskStatus.PENDING -> TaskStatus.PENDING
+        PTaskStatus.IN_PROGRESS -> TaskStatus.IN_PROGRESS
+        PTaskStatus.COMPLETED -> TaskStatus.COMPLETED
+    }
+}
+
 @StringRes
 fun PTaskStatus.toHeaderLabelRes(): Int {
     return when (this) {

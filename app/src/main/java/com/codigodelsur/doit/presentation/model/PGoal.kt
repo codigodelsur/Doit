@@ -6,8 +6,19 @@ data class PGoal(
     val id: Long,
     val taskId: Long,
     val title: String,
-    val isCompleted: Boolean,
-)
+    var isCompleted: Boolean,
+) {
+
+    fun toDomain(): Goal {
+        return Goal(
+            id = id,
+            taskId = taskId,
+            title = title,
+            isCompleted = isCompleted
+        )
+    }
+
+}
 
 fun Goal.toPresentation(): PGoal = PGoal(
     id = id,

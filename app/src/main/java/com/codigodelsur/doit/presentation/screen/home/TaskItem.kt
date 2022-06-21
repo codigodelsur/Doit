@@ -2,6 +2,7 @@ package com.codigodelsur.doit.presentation.screen.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,9 +33,13 @@ import com.codigodelsur.doit.presentation.util.toFormattedString
 fun TaskItem(
     task: PTask,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .run {
+                if (onClick != null) clickable { onClick() } else this
+            },
         elevation = 0.dp,
     ) {
         Row(modifier = Modifier.height(IntrinsicSize.Min)) {
@@ -103,6 +108,7 @@ fun TaskItemPreview() {
         TaskItem(
             task = PTask.sample,
             modifier = Modifier.padding(10.dp),
+            onClick = {}
         )
     }
 }

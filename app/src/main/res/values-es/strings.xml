@@ -28,4 +28,16 @@
     <string name="create_task_goals_hint">Ingrese un objetivo aquí</string>
 
     <string name="create_task_button">Crear tarea</string>
+
+    <string name="detail_task_top_bar_title">Detalle tarea</string>
+
+    <string name="detail_task_goals_subtitle">Subtareas</string>
+
+    <string name="detail_task_alert_dialog_title">Borrar tarea</string>
+    <string name="detail_task_alert_dialog_description">¿Está seguro de que desea eliminar esta tarea de forma permanente?</string>
+    <string name="detail_task_alert_dialog_confirm_button">Confirmar</string>
+    <string name="detail_task_alert_dialog_cancel_button">Cancelar</string>
+
+    <string name="detail_task_button">Guardar</string>
+
 </resources>

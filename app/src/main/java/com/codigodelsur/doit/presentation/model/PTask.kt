@@ -12,13 +12,32 @@ data class PTask(
     val goals: List<PGoal>,
     val status: PTaskStatus,
 ) {
+
+    fun toDomain(): Task {
+        return Task(
+            id = id,
+            title = title,
+            description = description,
+            date = date,
+            goals = goals.map(PGoal::toDomain),
+            status = status.toDomain()
+        )
+    }
+
     companion object {
         val sample = PTask(
             id = 0,
             title = "Take out the trash",
             description = "Lorem ipsum dolor sit amet, consectetur elit.",
             date = Date(),
-            goals = emptyList(),
+            goals = List(size = (1..3).random()) { index ->
+                PGoal(
+                    id = index.toLong(),
+                    taskId = 0,
+                    title = "Goal #$index",
+                    isCompleted = index % 2 == 0,
+                )
+            },
             status = PTaskStatus.PENDING,
         )
 

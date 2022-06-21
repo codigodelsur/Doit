@@ -1,15 +1,11 @@
 package com.codigodelsur.doit.presentation.component
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.FloatingActionButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -34,6 +30,26 @@ fun DoitTextButton(
             disabledElevation = 0.dp,
             hoveredElevation = 0.dp,
             focusedElevation = 0.dp,
+        ),
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        Text(text = text)
+    }
+}
+
+@Composable
+fun DoitOutlinedTextButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        border = BorderStroke(2.dp, MaterialTheme.colors.primary),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.background,
+            contentColor = MaterialTheme.colors.primary,
         ),
         contentPadding = PaddingValues(16.dp),
     ) {
@@ -71,6 +87,21 @@ fun DoitFloatingActionButton(
 fun DoitTextButtonPreview() {
     DoitTheme {
         DoitTextButton(
+            text = "Text",
+            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+        )
+    }
+}
+
+@Preview
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun DoitOutlinedTextButtonPreview() {
+    DoitTheme {
+        DoitOutlinedTextButton(
             text = "Text",
             onClick = {},
             modifier = Modifier

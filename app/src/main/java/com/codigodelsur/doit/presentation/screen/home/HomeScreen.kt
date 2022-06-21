@@ -42,11 +42,13 @@ import com.codigodelsur.doit.presentation.theme.DoitTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onCreateTask: () -> Unit,
+    onViewTaskItem: (PTask) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreenContent(
         uiState = viewModel.uiState,
         onCreateTask = onCreateTask,
+        onViewTaskItem = onViewTaskItem,
         modifier = modifier,
     )
 }
@@ -55,6 +57,7 @@ fun HomeScreen(
 fun HomeScreenContent(
     uiState: HomeUiState,
     onCreateTask: () -> Unit,
+    onViewTaskItem: (PTask) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val tasksGroupedByStatus = uiState.tasksGroupedByStatus
@@ -100,7 +103,10 @@ fun HomeScreenContent(
                         key = { task -> task.id },
                         contentType = { PTask::class.java.simpleName }
                     ) { task ->
-                        TaskItem(task = task)
+                        TaskItem(
+                            task = task,
+                            onClick = { onViewTaskItem(task) }
+                        )
                     }
                 }
             }
@@ -159,6 +165,7 @@ fun HomeScreenContentPreview() {
                 tasksGroupedByStatus = PTask.samplesGroupedByStatus,
             ),
             onCreateTask = {},
+            onViewTaskItem = {}
         )
     }
 }
