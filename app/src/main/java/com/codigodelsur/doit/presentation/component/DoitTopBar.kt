@@ -28,8 +28,8 @@ import com.codigodelsur.doit.presentation.theme.DoitTheme
 @Composable
 fun DoitTopBar(
     title: String,
-    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
+    onNavigateBack: (() -> Unit)? = null,
 ) {
     Column(modifier = modifier) {
         Spacer(
@@ -43,12 +43,14 @@ fun DoitTopBar(
                 .background(MaterialTheme.colors.background),
         )
         TopAppBar(
-            navigationIcon = {
-                IconButton(onClick = onNavigateBack) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(id = R.string.action_navigate_back)
-                    )
+            navigationIcon = onNavigateBack?.let {
+                {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = stringResource(id = R.string.action_navigate_back)
+                        )
+                    }
                 }
             },
             title = {
@@ -67,8 +69,8 @@ fun DoitTopBarPreview() {
     DoitTheme {
         DoitTopBar(
             title = "Title",
+            modifier = Modifier.padding(10.dp),
             onNavigateBack = {},
-            modifier = Modifier.padding(10.dp)
         )
     }
 }

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
@@ -21,8 +20,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.codigodelsur.doit.R
-import com.codigodelsur.doit.presentation.component.DoitFloatingActionButton
 import com.codigodelsur.doit.presentation.component.DoitPlaceholder
 import com.codigodelsur.doit.presentation.model.PTask
 import com.codigodelsur.doit.presentation.model.PTaskStatus
@@ -41,12 +37,10 @@ import com.codigodelsur.doit.presentation.theme.DoitTheme
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    onCreateTask: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreenContent(
         uiState = viewModel.uiState,
-        onCreateTask = onCreateTask,
         modifier = modifier,
     )
 }
@@ -54,7 +48,6 @@ fun HomeScreen(
 @Composable
 fun HomeScreenContent(
     uiState: HomeUiState,
-    onCreateTask: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val tasksGroupedByStatus = uiState.tasksGroupedByStatus
@@ -64,14 +57,6 @@ fun HomeScreenContent(
         topBar = {
             HomeToolbar()
         },
-        floatingActionButton = {
-            DoitFloatingActionButton(
-                icon = Icons.Default.Add,
-                onClick = onCreateTask,
-                contentDescription = stringResource(id = R.string.action_create_task),
-                modifier = Modifier.navigationBarsPadding(),
-            )
-        }
     ) { contentPadding ->
         if (tasksGroupedByStatus.isEmpty()) {
             DoitPlaceholder(
@@ -158,7 +143,6 @@ fun HomeScreenContentPreview() {
             uiState = HomeUiState(
                 tasksGroupedByStatus = PTask.samplesGroupedByStatus,
             ),
-            onCreateTask = {},
         )
     }
 }

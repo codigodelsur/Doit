@@ -4,6 +4,9 @@
     <string name="action_remove_goal">Eliminar objetivo</string>
     <string name="action_create_task">Crear tarea</string>
 
+    <string name="bottom_nav_bar_item_home">Principal</string>
+    <string name="bottom_nav_bar_item_create_task">Nueva tarea</string>
+
     <string name="task_status_pending">Pendiente</string>
     <string name="task_status_in_progress">En progreso</string>
     <string name="task_status_completed">Completada</string>
