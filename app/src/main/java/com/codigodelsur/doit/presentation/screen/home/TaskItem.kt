@@ -78,7 +78,9 @@ fun TaskItem(
                             tint = MaterialTheme.colors.onSurface.copy(
                                 alpha = ContentAlpha.disabled
                             ),
-                            contentDescription = null,
+                            contentDescription = stringResource(
+                                id = R.string.task_goals_icon_description
+                            ),
                         )
                     }
                 }

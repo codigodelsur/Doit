@@ -12,6 +12,8 @@
     <string name="tasks_header_in_progress">Tareas en progreso</string>
     <string name="tasks_header_completed">Tareas completadas</string>
 
+    <string name="task_goals_icon_description">Tarea con objetivos</string>
+
     <string name="home_placeholder_title">¿Día libre?</string>
     <string name="home_placeholder_description">Agrega una tarea</string>
 

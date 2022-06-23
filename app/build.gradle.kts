@@ -84,6 +84,7 @@ dependencies {
     androidTestImplementation(Deps.espressoCore)
     androidTestImplementation(Deps.testRunner)
     androidTestImplementation(Deps.composeUiTest)
+    debugImplementation(Deps.composeUiTestManifest)
 
     // Debug
     debugImplementation(Deps.composeUiTools)

@@ -80,4 +80,5 @@ object Deps {
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val testRunner = "androidx.test:runner:${Versions.runner}"
     const val composeUiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+    const val composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
 }
