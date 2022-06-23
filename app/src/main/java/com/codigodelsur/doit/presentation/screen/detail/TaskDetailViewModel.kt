@@ -11,6 +11,7 @@ import com.codigodelsur.doit.domain.interactor.ObserveTaskUseCase
 import com.codigodelsur.doit.domain.interactor.UpdateTaskUseCase
 import com.codigodelsur.doit.presentation.model.toPresentation
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,6 +32,7 @@ class TaskDetailViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             observeTask(taskId).collectLatest { task ->
+                delay(1500)
                 uiState = uiState.copy(task = task?.toPresentation())
             }
         }
@@ -42,6 +44,10 @@ class TaskDetailViewModel @Inject constructor(
 
     fun onDismissDialog() {
         uiState = uiState.copy(showDeleteTaskDialog = false)
+    }
+
+    fun onGoalsContentChange() {
+        uiState = uiState.copy(goalsExpanded = !uiState.goalsExpanded)
     }
 
     fun onUpdateGoal(goalId: Long, isCompleted: Boolean) {

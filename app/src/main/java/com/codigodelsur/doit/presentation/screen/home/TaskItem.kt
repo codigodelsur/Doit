@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -25,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codigodelsur.doit.R
+import com.codigodelsur.doit.presentation.component.DoitPlaceholderBox
 import com.codigodelsur.doit.presentation.model.PTask
 import com.codigodelsur.doit.presentation.theme.DoitTheme
 import com.codigodelsur.doit.presentation.util.toFormattedString
@@ -100,6 +102,48 @@ fun TaskItem(
     }
 }
 
+@Composable
+fun TaskItemPlaceholder(
+    alpha: Float,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        elevation = 0.dp,
+        modifier = modifier,
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            DoitPlaceholderBox(
+                height = 18.dp,
+                widthFraction = 0.3f,
+                alpha = alpha,
+            )
+            DoitPlaceholderBox(
+                height = 24.dp,
+                widthFraction = 0.7f,
+                alpha = alpha,
+            )
+            DoitPlaceholderBox(
+                height = 22.dp,
+                widthFraction = 0.9f,
+                alpha = alpha,
+            )
+            DoitPlaceholderBox(
+                height = 14.dp,
+                widthFraction = 0.2f,
+                alpha = alpha,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .align(Alignment.End),
+            )
+        }
+    }
+}
+
 @Preview
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
@@ -108,7 +152,16 @@ fun TaskItemPreview() {
         TaskItem(
             task = PTask.sample,
             modifier = Modifier.padding(10.dp),
-            onClick = {}
+            onClick = {},
         )
+    }
+}
+
+@Preview
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun TaskItemPlaceholderPreview() {
+    DoitTheme {
+        TaskItemPlaceholder(alpha = 0.2f)
     }
 }

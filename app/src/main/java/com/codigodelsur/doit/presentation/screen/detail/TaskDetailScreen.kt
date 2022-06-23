@@ -1,13 +1,28 @@
 package com.codigodelsur.doit.presentation.screen.detail
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Checkbox
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -50,6 +65,7 @@ fun TaskScreen(
         onUpdateTask = viewModel::onUpdateTask,
         onUpdateGoal = viewModel::onUpdateGoal,
         onShowDialog = viewModel::onShowDialog,
+        onGoalsContentChange = viewModel::onGoalsContentChange,
         onNavigateBack = onNavigateBack,
     )
 }
@@ -61,6 +77,7 @@ fun TaskScreenContent(
     onDeleteTaskCancel: () -> Unit,
     onUpdateTask: () -> Unit,
     onUpdateGoal: (Long, Boolean) -> Unit,
+    onGoalsContentChange: () -> Unit,
     onNavigateBack: () -> Unit,
     onShowDialog: () -> Unit,
     modifier: Modifier = Modifier,
@@ -95,9 +112,11 @@ fun TaskScreenContent(
                     TaskItem(task = uiState.task)
                     TaskGoalsContent(
                         goals = uiState.task.goals,
+                        goalsContentExpanded = uiState.goalsExpanded,
+                        onGoalsContentChange = onGoalsContentChange,
+                        onUpdateGoal = onUpdateGoal,
                         modifier = Modifier
                             .padding(top = 16.dp),
-                        onUpdateGoal = onUpdateGoal,
                     )
                 }
 
@@ -110,14 +129,7 @@ fun TaskScreenContent(
                 )
             }
         } else {
-            Box(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(contentPadding),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            TaskDetailScreenContentPlaceholder(contentPadding = contentPadding)
         }
 
         if (uiState.showDeleteTaskDialog) {
@@ -136,29 +148,49 @@ fun TaskScreenContent(
 @Composable
 fun TaskGoalsContent(
     goals: List<PGoal>,
+    goalsContentExpanded: Boolean,
+    onGoalsContentChange: () -> Unit,
     onUpdateGoal: (Long, Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.animateContentSize(),
         elevation = 0.dp
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
                 .fillMaxWidth()
+                .padding(16.dp),
         ) {
-            Text(
-                text = stringResource(id = R.string.detail_task_goals_subtitle),
-                style = MaterialTheme.typography.h6,
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = stringResource(id = R.string.detail_task_goals_subtitle),
+                    style = MaterialTheme.typography.h6,
+                )
+                Icon(
+                    imageVector = if (goalsContentExpanded) {
+                        Icons.Outlined.KeyboardArrowDown
+                    } else {
+                        Icons.Outlined.KeyboardArrowUp
+                    },
+                    modifier = Modifier
+                        .padding(end = 12.dp)
+                        .clickable { onGoalsContentChange() },
+                    contentDescription = stringResource(id = R.string.action_expand_goals),
+                )
+            }
 
             Column {
-                goals.forEach { goal ->
-                    GoalItem(
-                        goal = goal,
-                        onUpdateGoal = { onUpdateGoal(goal.id, !goal.isCompleted) }
-                    )
+                if (goalsContentExpanded) {
+                    goals.forEach { goal ->
+                        GoalItem(
+                            goal = goal,
+                            onUpdateGoal = { onUpdateGoal(goal.id, !goal.isCompleted) }
+                        )
+                    }
                 }
             }
         }
@@ -204,6 +236,7 @@ fun TaskDetailScreenPreview() {
             onUpdateGoal = { _, _ -> },
             onNavigateBack = { },
             onShowDialog = { },
+            onGoalsContentChange = { },
         )
     }
 }

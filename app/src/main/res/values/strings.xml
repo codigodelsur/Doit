@@ -4,6 +4,7 @@
     <string name="action_navigate_back">Navigate back</string>
     <string name="action_remove_goal">Remove goal</string>
     <string name="action_create_task">Create task</string>
+    <string name="action_expand_goals">Expand goals</string>
 
     <string name="task_status_pending">Pending</string>
     <string name="task_status_in_progress">In progress</string>
